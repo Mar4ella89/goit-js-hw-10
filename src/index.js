@@ -1,6 +1,8 @@
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
+import { markupFullInfo } from './template';
+import { markupListShortInfo } from './template';
 import './css/styles.css';
 
 const DEBOUNCE_DELAY = 500;
@@ -14,26 +16,26 @@ const refs = {
 
 let contriesList = [];
 
-const markupFullInfo = ({ flags, name, capital, population, languages }) =>
-  `<img src="${flags.svg}" alt="flag" width="30px" class="country-info-img">
-              <span class="country-info-name">${name.official}</span>  
-              <ul class="country-info-list">
-                <li class="country-info-item"><strong>Capital: </strong>${capital}</li>
-                <li class="country-info-item"><strong>Population: </strong>${population}</li>
-                <li class="country-info-item"><strong>Languages: </strong>${Object.values(
-                  languages
-                )}</li>
-              </ul>`;
-const markupListShortInfo = ({
-  flags,
-  name,
-  capital,
-  population,
-  languages,
-}) => `<li class="country-item">
-    <img src="${flags.svg}" alt="flag" width="30px" class="country-item-img">
-    <span class="country-item-name">${name.official}</span>
-  </li>`;
+// const markupFullInfo = ({ flags, name, capital, population, languages }) =>
+//   `<img src="${flags.svg}" alt="flag" width="30px" class="country-info-img">
+//               <span class="country-info-name">${name.official}</span>
+//               <ul class="country-info-list">
+//                 <li class="country-info-item"><strong>Capital: </strong>${capital}</li>
+//                 <li class="country-info-item"><strong>Population: </strong>${population}</li>
+//                 <li class="country-info-item"><strong>Languages: </strong>${Object.values(
+//                   languages
+//                 )}</li>
+//               </ul>`;
+// const markupListShortInfo = ({
+//   flags,
+//   name,
+//   capital,
+//   population,
+//   languages,
+// }) => `<li class="country-item">
+//     <img src="${flags.svg}" alt="flag" width="30px" class="country-item-img">
+//     <span class="country-item-name">${name.official}</span>
+//   </li>`;
 
 const clearMarkup = () => {
   refs.countryList.innerHTML = '';
@@ -47,6 +49,8 @@ const renders = () => {
 
   if (contriesList.length === 1) {
     refs.countryInfo.insertAdjacentHTML('beforeend', renderFullInfo.join(''));
+  } else if (contriesList.length > 10) {
+    return;
   } else {
     refs.countryList.insertAdjacentHTML(
       'beforeend',
