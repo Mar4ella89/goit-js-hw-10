@@ -57,6 +57,10 @@ const renders = () => {
 const handleInput = e => {
   const CountryName = e.target.value;
 
+  if (CountryName === '') {
+    clearMarkup();
+    return;
+  }
   fetchCountries(CountryName.trim());
   clearMarkup();
 };
