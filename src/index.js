@@ -36,6 +36,7 @@ const markupListShortInfo = ({
   </li>`;
 
 const clearMarkup = () => {
+  refs.countryList.innerHTML = '';
   refs.countryInfo.innerHTML = '';
   refs.countryInput.innerHTML = '';
 };
@@ -47,7 +48,7 @@ const renders = () => {
   if (contriesList.length === 1) {
     refs.countryInfo.insertAdjacentHTML('beforeend', renderFullInfo.join(''));
   } else {
-    refs.countryInfo.insertAdjacentHTML(
+    refs.countryList.insertAdjacentHTML(
       'beforeend',
       renderListShortInfo.join('')
     );
