@@ -1,8 +1,6 @@
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
-import { markupFullInfo } from './template';
-import { markupListShortInfo } from './template';
+import { markupFullInfo, markupListShortInfo } from './template';
 import './css/styles.css';
 
 const DEBOUNCE_DELAY = 500;
@@ -15,27 +13,6 @@ const refs = {
 };
 
 let contriesList = [];
-
-// const markupFullInfo = ({ flags, name, capital, population, languages }) =>
-//   `<img src="${flags.svg}" alt="flag" width="30px" class="country-info-img">
-//               <span class="country-info-name">${name.official}</span>
-//               <ul class="country-info-list">
-//                 <li class="country-info-item"><strong>Capital: </strong>${capital}</li>
-//                 <li class="country-info-item"><strong>Population: </strong>${population}</li>
-//                 <li class="country-info-item"><strong>Languages: </strong>${Object.values(
-//                   languages
-//                 )}</li>
-//               </ul>`;
-// const markupListShortInfo = ({
-//   flags,
-//   name,
-//   capital,
-//   population,
-//   languages,
-// }) => `<li class="country-item">
-//     <img src="${flags.svg}" alt="flag" width="30px" class="country-item-img">
-//     <span class="country-item-name">${name.official}</span>
-//   </li>`;
 
 const clearMarkup = () => {
   refs.countryList.innerHTML = '';
@@ -60,13 +37,13 @@ const renders = () => {
 };
 
 const handleInput = e => {
-  const CountryName = e.target.value;
+  const countryName = e.target.value.trim();
 
-  if (CountryName === '') {
+  if (countryName === '') {
     clearMarkup();
     return;
   }
-  fetchCountries(CountryName.trim());
+  fetchCountries(countryName);
   clearMarkup();
 };
 
