@@ -43,7 +43,7 @@ const clearMarkup = () => {
 const renders = () => {
   const renderFullInfo = contriesList.map(markupFullInfo);
   const renderListShortInfo = contriesList.map(markupListShortInfo);
-  clearMarkup();
+
   if (contriesList.length === 1) {
     refs.countryInfo.insertAdjacentHTML('beforeend', renderFullInfo.join(''));
   } else {
@@ -58,6 +58,7 @@ const handleInput = e => {
   const CountryName = e.target.value;
 
   fetchCountries(CountryName.trim());
+  clearMarkup();
 };
 
 function fetchCountries(name) {
